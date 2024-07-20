@@ -44,13 +44,29 @@
                    </div>
 
                     <div class="search-field">
-                        <input type="text" placeholder="Search...">
-                        <i class='bx bx-search'></i>
+                        <input  type="search" id="search-input" placeholder="Search...">
+                        <i class='bx bx-search' id="search-icon"></i>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    <div>
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select">
+            <option value="title">Title</option>
+            <option value="author.fullname">Author</option>
+            <option value="averageRating">Rating</option>
+        </select>
+
+        <label for="genre-select">Genre:</label>
+        <select id="genre-select">
+            <option value="">All</option>
+            <option value="fiction">Fiction</option>
+            <option value="non-fiction">Non-Fiction</option>
+            <!-- Add more genres as needed -->
+        </select>
+    </div>
     <div id="book-list">
 
     </div>
@@ -62,7 +78,7 @@
 
 <script src="../js/nav.js">
 </script>
-<script src="../js/home.js">
+<script src="../js/book-search.js">
 
 </script>
 
