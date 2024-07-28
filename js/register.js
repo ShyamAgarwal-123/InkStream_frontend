@@ -39,7 +39,7 @@ form.addEventListener('submit', (event) => {
       }
       return response.json();
     }).then(data => {
-      console.log('Success:', data);
+      alert("Successfully Registerd")
     }).catch(error => {
       console.error('Error:', error);
     });

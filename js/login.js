@@ -21,7 +21,7 @@ form.addEventListener('submit', (event) => {
         email,
         password,
       }),
-      //credentials: "include",
+      credentials: "include",
     }).then(response => {
       if(response.status === 400){
         alert("All Fields are Required")
@@ -42,8 +42,14 @@ form.addEventListener('submit', (event) => {
         return response.json();
       }
     }).then(data => {
-      console.log('Success:', data);
-      window.location.href = '../html/home.html'; // Redirect to home page after successful login
+      // store userid
+      localStorage.setItem("userId",data.data.user._id)
+      localStorage.setItem("myusername",data.data.user.username)
+      // Store tokens
+      localStorage.setItem('accessToken', data.data.accessToken);
+      localStorage.setItem('refreshToken', data.data.refreshToken);
+      //console.log('Success:', data);
+      window.location.href = '../html/index.html'; // Redirect to home page after successful login
     }).catch(error => {
       console.error('Error:', error);
     });

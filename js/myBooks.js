@@ -40,7 +40,7 @@ async function fetchBooks(page, limit) {
   const sortType = document.getElementById('sort-type').value;  
 
   try {
-    let response = await fetch(`http://localhost:8000/api/v1/books/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
+    let response = await fetch(`http://localhost:8000/api/v1/users/myBooks/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
       method: 'GET',
       credentials: 'include', // Include credentials (cookies) with the request
       headers:{
@@ -63,7 +63,7 @@ async function fetchBooks(page, limit) {
         localStorage.setItem('accessToken', accessToken);
         
         // Retry the original request with the new access token
-        response = await fetch(`http://localhost:8000/api/v1/books/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
+        response = await fetch(`http://localhost:8000/api/v1/users/myBooks/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
           method: 'GET',
           credentials: 'include', // Include credentials (cookies) with the request
           headers:{
@@ -72,7 +72,7 @@ async function fetchBooks(page, limit) {
         });
       } else {
         // If the refresh token is invalid, clear tokens and redirect to login
-        
+
         // localStorage.removeItem('accessToken');
         // localStorage.removeItem('refreshToken');
         localStorage.clear();
@@ -83,7 +83,7 @@ async function fetchBooks(page, limit) {
     const data = await response.json();
     renderBooks(data.data.books);
     updatePagination(data.data.currentPage, data.data.totalPages);
-    // console.log(data);
+    //console.log(data);
   } catch (error) {
     console.error('Error fetching books:', error);
   }
@@ -94,10 +94,8 @@ function renderBooks(books) {
   bookList.innerHTML = ''; // Clear existing content
 
   books.forEach(book => {
-    if (!book.isAvailable) {
-      return;
-    }
 
+    const bookId  = book._id;
     const bookItem = document.createElement('div');
     bookItem.className = 'book-item';
     const authorDiv = document.createElement('div');
@@ -181,8 +179,105 @@ function renderBooks(books) {
     const avgRating = document.createElement('p');
     avgRating.classList.add('avgRating');
     avgRating.textContent = book.averageRating;
-
     ratingDiv.appendChild(avgRating);
+
+    const toggelButton = document.createElement('button');
+    toggelButton.classList.add('toggelButton');
+    if (book.isAvailable) {
+      toggelButton.textContent = "UnPublish"
+      try {
+        toggelButton.addEventListener("click",async()=>{
+          let response  = await fetch(`http://localhost:8000/api/v1/books/toggelBookAvailibility/${bookId}`,{
+            method : 'PUT',
+            headers:{
+                'Authorization': `Bearer ${accessToken}`
+            }
+          });
+          if (response.status === 401) {
+            // Attempt to refresh the access token
+            const refreshResponse = await fetch('http://localhost:8000/api/v1/users/refresh-token', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ refreshToken }),
+            });
+            
+            if (refreshResponse.ok) {
+              const data = await refreshResponse.json();
+              accessToken = data.data.accessToken;
+              localStorage.setItem('accessToken', accessToken);
+              
+              // Retry the original request with the new access token
+              response  = await fetch(`http://localhost:8000/api/v1/books/toggelBookAvailibility/${bookId}`,{
+                method : 'PUT',
+                headers:{
+                    'Authorization': `Bearer ${accessToken}`
+                }
+              });
+            } else {
+              // If the refresh token is invalid, clear tokens and redirect to login
+
+              // localStorage.removeItem('accessToken');
+              // localStorage.removeItem('refreshToken');
+              localStorage.clear();
+              window.location.href = '../html/login.html';
+              throw new Error('Unable to refresh token');
+            }
+          }
+        
+        fetchBooks(currentPage,limit);
+        })
+      } catch (error) {
+        console.error("Error while UnPublishing the Book: ",error)
+      }
+    }else{
+      toggelButton.textContent = "Publish"
+      try {
+        toggelButton.addEventListener("click",async()=>{
+          let response  = await fetch(`http://localhost:8000/api/v1/books/toggelBookAvailibility/${bookId}`,{
+            method : 'PUT',
+            headers:{
+                'Authorization': `Bearer ${accessToken}`
+            }
+          });
+          if (response.status === 401) {
+            // Attempt to refresh the access token
+            const refreshResponse = await fetch('http://localhost:8000/api/v1/users/refresh-token', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ refreshToken }),
+            });
+            
+            if (refreshResponse.ok) {
+              const data = await refreshResponse.json();
+              accessToken = data.data.accessToken;
+              localStorage.setItem('accessToken', accessToken);
+              
+              // Retry the original request with the new access token
+              response  = await fetch(`http://localhost:8000/api/v1/books/toggelBookAvailibility/${bookId}`,{
+                method : 'PUT',
+                headers:{
+                    'Authorization': `Bearer ${accessToken}`
+                }
+              });
+            } else {
+              // If the refresh token is invalid, clear tokens and redirect to login
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
+              window.location.href = '../html/login.html';
+              throw new Error('Unable to refresh token');
+            }
+          }
+        fetchBooks(currentPage,limit);
+        })
+      } catch (error) {
+        console.error("Error while Publishing the Book: ",error)
+      }
+    }
+    ratingDiv.appendChild(toggelButton);
 
     bookReviews.appendChild(ratingDiv);
 

@@ -16,31 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPage++;
     fetchBooks(currentPage, limit);
   });
-
-  document.getElementById('search-input').addEventListener('input', () => {
-    fetchBooks(currentPage, limit);
-  });
-
-  document.getElementById('sort-select').addEventListener('change', () => {
-    fetchBooks(currentPage, limit);
-  });
-
-  document.getElementById('genre-select').addEventListener('change', () => {
-    fetchBooks(currentPage, limit);
-  });
-  document.getElementById('sort-type').addEventListener('change', () => {
-    fetchBooks(currentPage, limit);
-  });
 });
 
-async function fetchBooks(page, limit) {
-  const query = document.getElementById('search-input').value;
-  const sortBy = document.getElementById('sort-select').value;
-  const genre = document.getElementById('genre-select').value;
-  const sortType = document.getElementById('sort-type').value;  
+async function fetchBooks(page, limit) {  
 
   try {
-    let response = await fetch(`http://localhost:8000/api/v1/books/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
+    let response = await fetch(`http://localhost:8000/api/v1/users/purchasedBooks/?page=${page}&limit=${limit}`, {
       method: 'GET',
       credentials: 'include', // Include credentials (cookies) with the request
       headers:{
@@ -63,7 +44,7 @@ async function fetchBooks(page, limit) {
         localStorage.setItem('accessToken', accessToken);
         
         // Retry the original request with the new access token
-        response = await fetch(`http://localhost:8000/api/v1/books/?page=${page}&limit=${limit}&query=${query}&sortBy=${sortBy}&sortType=${sortType}&genre=${genre}`, {
+        response = await fetch(`http://localhost:8000/api/v1/users/purchasedBooks/?page=${page}&limit=${limit}`, {
           method: 'GET',
           credentials: 'include', // Include credentials (cookies) with the request
           headers:{
@@ -72,7 +53,7 @@ async function fetchBooks(page, limit) {
         });
       } else {
         // If the refresh token is invalid, clear tokens and redirect to login
-        
+
         // localStorage.removeItem('accessToken');
         // localStorage.removeItem('refreshToken');
         localStorage.clear();
@@ -81,9 +62,9 @@ async function fetchBooks(page, limit) {
       }
     }
     const data = await response.json();
-    renderBooks(data.data.books);
+    renderBooks(data.data.purchasedBooks);
     updatePagination(data.data.currentPage, data.data.totalPages);
-    // console.log(data);
+    //console.log(data);
   } catch (error) {
     console.error('Error fetching books:', error);
   }
@@ -94,10 +75,8 @@ function renderBooks(books) {
   bookList.innerHTML = ''; // Clear existing content
 
   books.forEach(book => {
-    if (!book.isAvailable) {
-      return;
-    }
 
+    const bookId  = book.book._id;
     const bookItem = document.createElement('div');
     bookItem.className = 'book-item';
     const authorDiv = document.createElement('div');
@@ -107,12 +86,12 @@ function renderBooks(books) {
 
     // Cover image render
     const coverImg = document.createElement('img');
-    coverImg.src = book.coverImage;
+    coverImg.src = book.book.coverImage;
     coverImg.classList.add('cover-img');
     imgDiv.appendChild(coverImg);
     bookItem.appendChild(imgDiv);
     imgDiv.addEventListener("click",()=>{
-      localStorage.setItem("clickedBookId",book._id)
+      localStorage.setItem("clickedBookId",book.book._id)
       window.location.href = `../html/book.html`;
       fetchBooks(currentPage,limit);
     })
@@ -126,7 +105,7 @@ function renderBooks(books) {
     avatarDiv.classList.add("avatar-div");
     const authorAvatar = document.createElement('img');
     authorAvatar.classList.add('authorAvatar');
-    authorAvatar.src = book.author.avatar;
+    authorAvatar.src = book.book.author.avatar;
     authorAvatar.addEventListener('click',()=>{
       localStorage.setItem("clickedUsername",book.author.username)
       window.location.href = `../html/user.html`;
@@ -137,22 +116,22 @@ function renderBooks(books) {
     authorDiv.appendChild(avatarDiv);
 
     const bookTitle = document.createElement('h2');
-    bookTitle.textContent = book.title;
+    bookTitle.textContent = book.book.title;
     bookTitle.classList.add("bookTitle");
     bookDetails.appendChild(bookTitle);
 
     const bookAuthor = document.createElement('p');
-    bookAuthor.innerHTML = `<strong>Author</strong>:${book.author.fullname}`;
+    bookAuthor.innerHTML = `<strong>Author</strong>:${book.book.author.fullname}`;
     bookAuthor.classList.add("bookAuthor");
     bookDetails.appendChild(bookAuthor);
 
     const bookGenre = document.createElement('p');
-    bookGenre.innerHTML = `<strong>Genre</strong>:${book.genre}`;
+    bookGenre.innerHTML = `<strong>Genre</strong>:${book.book.genre}`;
     bookGenre.classList.add("bookGenre");
     bookDetails.appendChild(bookGenre);
 
     const bookPrice = document.createElement('p');
-    bookPrice.innerHTML = `<strong>Price</strong>:${book.price}`;
+    bookPrice.innerHTML = `<strong>Price</strong>:${book.book.price}`;
     bookPrice.classList.add("bookGenre");
     bookDetails.appendChild(bookPrice);
 
@@ -167,7 +146,7 @@ function renderBooks(books) {
     commentDiv.appendChild(commentImg);
     const totalComments = document.createElement('p');
     totalComments.classList.add('totalComments');
-    totalComments.textContent = `${book.totalReviews}`;
+    totalComments.textContent = `${book.book.totalReviews}`;
     commentDiv.appendChild(totalComments);
 
     bookReviews.appendChild(commentDiv);
@@ -180,8 +159,7 @@ function renderBooks(books) {
     ratingDiv.appendChild(ratingImg);
     const avgRating = document.createElement('p');
     avgRating.classList.add('avgRating');
-    avgRating.textContent = book.averageRating;
-
+    avgRating.textContent = book.book.averageRating;
     ratingDiv.appendChild(avgRating);
 
     bookReviews.appendChild(ratingDiv);

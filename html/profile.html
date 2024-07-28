@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/profile.css">
-    <title>Document</title>
+    <title>Profile</title>
 </head>
 <body>
     <img src="../public/logo/logo.png" alt="" class="logo">
@@ -12,11 +12,15 @@
     <div id="container">
         <div id="left-side">
             <ul id="registrationForm">
-                <a href=""><li>My Profile</li></a>
-                <a href=""><li>Update Profile</li></a>
-                <a href=""><li>My Books</li></a>
-                <a href=""><li>Favourite Books</li></a>
-                <button>Log out</button> 
+                <a href="./user.html"><li class="profile">My Profile</li></a>
+                <a href="./updateProfile.html"><li >Update Email</li></a>
+                <a href="./updateAvatar.html"><li >Update Profile Image</li></a>
+                <a href="./updatePassword.html"><li>Update Password</li></a>
+                <a href="./myBooks.html"><li>My Books</li></a>
+                <a href="./boughtBooks.html"><li>Purchased Books</li></a>
+                <a href="./favBooks.html"><li>Favourite Books</li></a>
+                <a href="./index.html"><li>Books</li></a>
+                <button class="logout">Log out</button> 
             </ul>
              
         </div>
@@ -30,6 +34,7 @@
             
         </div>
     </div>
-    <script src="../js/login.js"></script>
+    <!-- <script src="../js/login.js"></script> -->
+     <script src="../js/profile.js"></script>
 </body>
 </html>
