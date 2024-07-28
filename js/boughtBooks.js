@@ -57,7 +57,7 @@ async function fetchBooks(page, limit) {
         // localStorage.removeItem('accessToken');
         // localStorage.removeItem('refreshToken');
         localStorage.clear();
-        window.location.href = '../docs/login.html';
+        window.location.href = '../html/login.html';
         throw new Error('Unable to refresh token');
       }
     }
@@ -92,7 +92,7 @@ function renderBooks(books) {
     bookItem.appendChild(imgDiv);
     imgDiv.addEventListener("click",()=>{
       localStorage.setItem("clickedBookId",book.book._id)
-      window.location.href = `../docs/book.html`;
+      window.location.href = `../html/book.html`;
       fetchBooks(currentPage,limit);
     })
 
@@ -108,7 +108,7 @@ function renderBooks(books) {
     authorAvatar.src = book.book.author.avatar;
     authorAvatar.addEventListener('click',()=>{
       localStorage.setItem("clickedUsername",book.author.username)
-      window.location.href = `../docs/user.html`;
+      window.location.href = `../html/user.html`;
       fetchUsers(currentPage,limit);
     })
     avatarDiv.appendChild(authorAvatar);

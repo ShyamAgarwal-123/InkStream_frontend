@@ -49,7 +49,7 @@ form.addEventListener('submit', (event) => {
       localStorage.setItem('accessToken', data.data.accessToken);
       localStorage.setItem('refreshToken', data.data.refreshToken);
       //console.log('Success:', data);
-      window.location.href = '../docs/index.html'; // Redirect to home page after successful login
+      window.location.href = '../html/index.html'; // Redirect to home page after successful login
     }).catch(error => {
       console.error('Error:', error);
     });

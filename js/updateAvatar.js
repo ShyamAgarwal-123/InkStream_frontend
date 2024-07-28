@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async() => {
               } else {
                   console.error('Token refresh failed:', await refreshResponse.text());
                   localStorage.clear();
-                  window.location.href = '../docs/login.html';
+                  window.location.href = '../html/login.html';
                   throw new Error('Unable to refresh token');
               }
           } else if (response.status === 400) {

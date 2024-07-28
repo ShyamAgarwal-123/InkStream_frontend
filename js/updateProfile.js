@@ -25,7 +25,7 @@ email_form.addEventListener('submit', async (event) => {
         if (response.ok) {
             alert("Email is Successfully updated")
             localStorage.clear();
-            window.location.href = '../docs/login.html';
+            window.location.href = '../html/login.html';
         }
         else if (response.status === 401) {
             // Attempt to refresh the access token
@@ -58,7 +58,7 @@ email_form.addEventListener('submit', async (event) => {
               if (response.ok) {
                 alert("Email is Successfully updated")
                 localStorage.clear();
-                window.location.href = '../docs/login.html';
+                window.location.href = '../html/login.html';
               }
               else if(response.status === 400){
                 alert("Email Field is Empty")
@@ -74,7 +74,7 @@ email_form.addEventListener('submit', async (event) => {
               }
             } else {
               localStorage.clear();
-              window.location.href = '../docs/login.html';
+              window.location.href = '../html/login.html';
               throw new Error('Unable to refresh token');
             }
         }

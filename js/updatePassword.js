@@ -26,7 +26,7 @@ form.addEventListener('submit', async (event) => {
         if (response.ok) {
             alert("Password is Successfully updated")
             localStorage.clear();
-            window.location.href = '../docs/login.html';
+            window.location.href = '../html/login.html';
         }
         else if (response.status === 401) {
             // Attempt to refresh the access token
@@ -61,7 +61,7 @@ form.addEventListener('submit', async (event) => {
               if (response.ok) {
                 alert("Password is Successfully updated")
                 localStorage.clear();
-                window.location.href = '../docs/login.html';
+                window.location.href = '../html/login.html';
               }
               else if(response.status === 400){
                 alert("All Fields are Required")
@@ -81,7 +81,7 @@ form.addEventListener('submit', async (event) => {
               
             } else {
               localStorage.clear();
-              window.location.href = '../docs/login.html';
+              window.location.href = '../html/login.html';
               throw new Error('Unable to refresh token');
             }
           }
