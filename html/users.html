@@ -5,25 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/users.css">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
-     <title>Favourite</title>
+     <title>Users</title>
 </head>
 <body>
     <nav>
         <div class="nav-bar">
             <i class='bx bx-menu sidebarOpen' ></i>
-            <span class="logo navLogo"><a href="index.html">InkStream</a></span>
+            <span class="logo navLogo"><a href="../index.html">InkStream</a></span>
 
             <div class="menu">
                 <div class="logo-toggle">
-                    <span class="logo"><a href="index.html">InkStream</a></span>
+                    <span class="logo"><a href="../index.html">InkStream</a></span>
                     <i class='bx bx-x siderbarClose'></i>
                 </div>
 
                 <ul class="nav-links">
-                    <li><a href="./index.html">Books</a></li>
+                    <li><a href="../index.html">Books</a></li>
                     <li><a href="./users.html">Users</a></li>
                     <li><a href="./profile.html">Profile</a></li>
                     <li><a href="./uploadBook.html">Upload</a></li>
@@ -53,26 +53,18 @@
     <div class="sort">
         <label for="sort-select">Sort by:</label>
         <select id="sort-select">
-            <option value="title">Title</option>
-            <option value="author.fullname">Author</option>
-            <option value="averageRating">Rating</option>
-            <option value="price">Price</option>
+            <option value="fullname">Fullname</option>
+            <option value="username">Username</option>
         </select>
 
-        <label for="genre-select">Genre:</label>
-        <select id="genre-select">
-            <option value="">All</option>
-            <option value="fiction">Fiction</option>
-            <option value="non-fiction">Non-Fiction</option>
-        </select>
         <label for="sort-type">SortType:</label>
         <select id="sort-type">
             <option value="asc">Asc</option>
             <option value="dsc">Dsc</option>
         </select>
     </div>
-    <div id="book-list">
-
+    <div id="user-list">
+        <!-- I kept the structure of users page same as home page -->
     </div>
     <div id="pagination">
         <button id="prev-btn">Previous</button>
@@ -82,7 +74,7 @@
 
 <script src="../js/nav.js">
 </script>
-<script type="module" src="../js/favBooks.js">
+<script type="module" src="../js/users.js">
 
 </script>
 
