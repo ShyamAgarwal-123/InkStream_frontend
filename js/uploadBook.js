@@ -62,12 +62,21 @@ form.addEventListener('submit', async (event) => {
               },
               credentials: 'include',
             });
+            if (response.ok) {
+              alert("Book is Successfully Uploaded")
+            }
+            else if(response.status === 400){
+              alert("All Fields are Required")
+            }
+            else if(!response.ok) {
+              alert('Unable To Upload Book');
+            }
           } else {
             // If the refresh token is invalid, clear tokens and redirect to login
           //   localStorage.removeItem('accessToken');
           //   localStorage.removeItem('refreshToken');
             localStorage.clear();
-            window.location.href = '../html/login.html';
+            window.location.href = '../docs/login.html';
             throw new Error('Unable to refresh token');
           }
         }

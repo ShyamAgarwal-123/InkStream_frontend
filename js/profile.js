@@ -46,14 +46,14 @@ logout.addEventListener('click',async()=>{
             //   localStorage.removeItem('accessToken');
             //   localStorage.removeItem('refreshToken');
               localStorage.clear();
-              window.location.href = '../html/login.html';
+              window.location.href = '../docs/login.html';
               throw new Error('Unable to refresh token');
             }
           }
         if (response.ok) {
             console.log(await response.json())// remove in future
             localStorage.clear();
-            window.location.href = '../html/login.html';
+            window.location.href = '../docs/login.html';
         }
         
     } catch (error) {

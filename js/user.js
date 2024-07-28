@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   // localStorage.removeItem('accessToken');
                   // localStorage.removeItem('refreshToken');
                   localStorage.clear();
-                  window.location.href = '../html/login.html';
+                  window.location.href = '../docs/login.html';
                   throw new Error('Unable to refresh token');
                 }
             }
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //   localStorage.removeItem('accessToken');
                     //   localStorage.removeItem('refreshToken');
                       localStorage.clear();
-                      window.location.href = '../html/login.html';
+                      window.location.href = '../docs/login.html';
                       throw new Error('Unable to refresh token');
                     }
                 }
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //   localStorage.removeItem('accessToken');
                     //   localStorage.removeItem('refreshToken');
                       localStorage.clear();
-                      window.location.href = '../html/login.html';
+                      window.location.href = '../docs/login.html';
                       throw new Error('Unable to refresh token');
                     }
                 }
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bookItem.appendChild(imgDiv);
             imgDiv.addEventListener("click",()=>{
               localStorage.setItem("clickedBookId",book._id)
-              window.location.href = `../html/book.html`;
+              window.location.href = `../docs/book.html`;
               fetchBooks(currentPage,limit);
             })
         

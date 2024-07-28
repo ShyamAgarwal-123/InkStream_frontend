@@ -25,7 +25,7 @@ email_form.addEventListener('submit', async (event) => {
         if (response.ok) {
             alert("Email is Successfully updated")
             localStorage.clear();
-            window.location.href = '../html/login.html';
+            window.location.href = '../docs/login.html';
         }
         else if (response.status === 401) {
             // Attempt to refresh the access token
@@ -54,13 +54,30 @@ email_form.addEventListener('submit', async (event) => {
                     email
                 }),
 
-            });
+              });
+              if (response.ok) {
+                alert("Email is Successfully updated")
+                localStorage.clear();
+                window.location.href = '../docs/login.html';
+              }
+              else if(response.status === 400){
+                alert("Email Field is Empty")
+              }
+              else if(response.status === 409){
+                alert("Email already exists")
+              }
+              else if(response.status === 402){
+                alert("Something Went wrong Please Try Again")
+              }
+              else if (!response.ok) {
+               alert('Unable to update Email');
+              }
             } else {
               localStorage.clear();
-              window.location.href = '../html/login.html';
+              window.location.href = '../docs/login.html';
               throw new Error('Unable to refresh token');
             }
-          }
+        }
         else if(response.status === 400){
             alert("Email Field is Empty")
         }

@@ -72,7 +72,7 @@ async function fetchUsers(page, limit) {
         // localStorage.removeItem('accessToken');
         // localStorage.removeItem('refreshToken');
         localStorage.clear();
-        window.location.href = '../html/login.html';
+        window.location.href = '../docs/login.html';
         throw new Error('Unable to refresh token');
       }
     }
@@ -106,7 +106,7 @@ function renderUsers(users) {
     userItem.appendChild(imgDiv);
     imgDiv.addEventListener("click",()=>{
       localStorage.setItem("clickedUsername",user.username)
-      window.location.href = `../html/user.html`;
+      window.location.href = `../docs/user.html`;
       fetchUsers(currentPage,limit);
     })
 

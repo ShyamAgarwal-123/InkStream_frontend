@@ -21,12 +21,9 @@ document.addEventListener('DOMContentLoaded', async() => {
               body: formData,
           });
 
-          console.log('Initial response status:', response.status);
 
           if (response.ok) {
               alert("Profile Image Successfully updated");
-              localStorage.clear();
-              window.location.href = '../html/login.html';
           } else if (response.status === 401) {
               // Attempt to refresh the access token
               const refreshResponse = await fetch('http://localhost:8000/api/v1/users/refresh-token', {
@@ -36,8 +33,6 @@ document.addEventListener('DOMContentLoaded', async() => {
                   },
                   body: JSON.stringify({ refreshToken }),
               });
-
-              console.log('Refresh response status:', refreshResponse.status);
 
               if (refreshResponse.ok) {
                   const data = await refreshResponse.json();
@@ -54,12 +49,8 @@ document.addEventListener('DOMContentLoaded', async() => {
                       body: formData,
                   });
 
-                  console.log('Retry response status:', response.status);
-
                   if (response.ok) {
                       alert("Profile Image Successfully updated");
-                      localStorage.clear();
-                      window.location.href = '../html/login.html';
                   } else {
                       console.error('Retry failed:', await response.text());
                       throw new Error('Retrying the request failed');
@@ -67,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async() => {
               } else {
                   console.error('Token refresh failed:', await refreshResponse.text());
                   localStorage.clear();
-                  window.location.href = '../html/login.html';
+                  window.location.href = '../docs/login.html';
                   throw new Error('Unable to refresh token');
               }
           } else if (response.status === 400) {

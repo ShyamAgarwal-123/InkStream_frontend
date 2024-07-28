@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   // localStorage.removeItem('accessToken');
                   // localStorage.removeItem('refreshToken');
                   localStorage.clear();
-                  window.location.href = '../html/login.html';
+                  window.location.href = '../docs/login.html';
                   throw new Error('Unable to refresh token');
                 }
             }
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //   localStorage.removeItem('accessToken');
                     //   localStorage.removeItem('refreshToken');
                       localStorage.clear();
-                      window.location.href = '../html/login.html';
+                      window.location.href = '../docs/login.html';
                       throw new Error('Unable to refresh token');
                     }
                 }
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     //   localStorage.removeItem('accessToken');
                     //   localStorage.removeItem('refreshToken');
                       localStorage.clear();
-                      window.location.href = '../html/login.html';
+                      window.location.href = '../docs/login.html';
                       throw new Error('Unable to refresh token');
                     }
                 }
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   //   localStorage.removeItem('accessToken');
                   //   localStorage.removeItem('refreshToken');
                     localStorage.clear();
-                    window.location.href = '../html/login.html';
+                    window.location.href = '../docs/login.html';
                     throw new Error('Unable to refresh token');
                   }
               }
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const ownerAvatar = document.createElement('img');
             ownerAvatar.addEventListener('click',()=>{
               localStorage.setItem("clickedUsername",review.owner.username)
-              window.location.href = `../html/user.html`;
+              window.location.href = `../docs/user.html`;
               fetchBook(bookId);
             })
             const ownerfullname = document.createElement('p');
@@ -396,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         //   localStorage.removeItem('accessToken');
                         //   localStorage.removeItem('refreshToken');
                           localStorage.clear();
-                          window.location.href = '../html/login.html';
+                          window.location.href = '../docs/login.html';
                           throw new Error('Unable to refresh token');
                         }
                       }
@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         //   localStorage.removeItem('accessToken');
                         //   localStorage.removeItem('refreshToken');
                           localStorage.clear();
-                          window.location.href = '../html/login.html';
+                          window.location.href = '../docs/login.html';
                           throw new Error('Unable to refresh token');
                         }
                       }
@@ -537,7 +537,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         //   localStorage.removeItem('accessToken');
                         //   localStorage.removeItem('refreshToken');
                           localStorage.clear();
-                          window.location.href = '../html/login.html';
+                          window.location.href = '../docs/login.html';
                           throw new Error('Unable to refresh token');
                         }
                       }
@@ -571,7 +571,7 @@ document.addEventListener("DOMContentLoaded", function() {
         authorAvatar.src = book.author[0].avatar;
         authorAvatar.addEventListener('click',()=>{
           localStorage.setItem("clickedUsername",book.author[0].username)
-          window.location.href = `../html/user.html`;
+          window.location.href = `../docs/user.html`;
           fetchBook(bookId);
         })
         authorAvatarDiv.appendChild(authorAvatar);     
@@ -634,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 //   localStorage.removeItem('accessToken');
                 //   localStorage.removeItem('refreshToken');
                   localStorage.clear();
-                  window.location.href = '../html/login.html';
+                  window.location.href = '../docs/login.html';
                   throw new Error('Unable to refresh token');
                 }
               }
