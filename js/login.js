@@ -1,8 +1,5 @@
 const form = document.getElementById("registrationForm");
 
-
-
-
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -56,6 +53,7 @@ form.addEventListener('submit', (event) => {
     }).catch(error => {
       console.error('Error:', error);
     });
+    form.reset();
     
 
 })
