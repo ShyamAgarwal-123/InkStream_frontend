@@ -43,8 +43,6 @@ logout.addEventListener('click',async()=>{
             });
             } else {
               // If the refresh token is invalid, clear tokens and redirect to login
-            //   localStorage.removeItem('accessToken');
-            //   localStorage.removeItem('refreshToken');
               localStorage.clear();
               window.location.href = '../html/login.html';
               throw new Error('Unable to refresh token');
