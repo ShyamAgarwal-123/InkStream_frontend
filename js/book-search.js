@@ -130,7 +130,7 @@ function renderBooks(books) {
     authorAvatar.addEventListener('click',()=>{
       localStorage.setItem("clickedUsername",book.author.username)
       window.location.href = `../html/user.html`;
-      fetchUsers(currentPage,limit);
+      fetchBooks(currentPage,limit);
     })
     avatarDiv.appendChild(authorAvatar);
 
